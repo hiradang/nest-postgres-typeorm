@@ -7,6 +7,6 @@ export class AppService {
   }
 
   getSomething(): string {
-    return 'something 2';
+    return 'something 1';
   }
 }
