@@ -2,7 +2,7 @@ import { IsNotEmpty, Length } from 'class-validator';
 
 export class CreateQuizDto {
   @IsNotEmpty({ message: 'Title is required' })
-  @Length(3, 'Title must be longer then 3 characters')
+  @Length(3)
   title: string;
 
   @IsNotEmpty({ message: 'This field is required' })
