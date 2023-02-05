@@ -1,3 +1,4 @@
+import { ApiTags } from '@nestjs/swagger/dist';
 import { QuizService } from '../services/quiz.service';
 import {
   Body,
@@ -10,6 +11,7 @@ import { CreateQuestionDto } from '../dto/create-question.dto';
 import { Question } from '../entities/question.entity';
 import { QuestionService } from '../services/question.service';
 
+@ApiTags('Question')
 @Controller('question')
 export class QuestionController {
   constructor(
