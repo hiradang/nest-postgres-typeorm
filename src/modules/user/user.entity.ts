@@ -9,6 +9,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
+import { UserRoles } from './enums/user.enum';
 
 @Entity('users')
 export class User extends BaseEntity {
@@ -39,6 +40,9 @@ export class User extends BaseEntity {
   })
   @Column()
   password: string;
+
+  @Column({ type: 'enum', enum: UserRoles, default: UserRoles.MEMBER })
+  role: UserRoles;
 
   @ApiProperty({
     description: 'When user is created',
