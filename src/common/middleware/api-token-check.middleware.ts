@@ -9,7 +9,6 @@ import { ApiTokenPaymentException } from '../exception/api-token-payment.excepti
 
 export class ApiTokenCheckMiddleWare implements NestMiddleware {
   use(req: Request, res: Response, next: NextFunction) {
-    console.log(req.headers);
     if (req.headers['api-token'] !== 'my-token') {
       //   throw new BadRequestException('The token does not match');
       //   throw new HttpException('My response', HttpStatus.PAYMENT_REQUIRED);

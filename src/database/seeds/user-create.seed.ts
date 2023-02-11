@@ -1,6 +1,7 @@
 import { Seeder, Factory } from 'typeorm-seeding';
 import { Connection, getManager } from 'typeorm';
 import { User } from '../../modules/user/user.entity';
+import { UserRoles } from '../../modules/user/enums/user.enum';
 
 export class UserCreateSeed implements Seeder {
   public async run(factory: Factory, connection: Connection): Promise<void> {
@@ -12,6 +13,7 @@ export class UserCreateSeed implements Seeder {
       name: 'Binh Dang',
       email: 'binhdt@gmail.com',
       password: 'abc@31',
+      role: UserRoles.ADMIN,
     });
 
     // await factory(User)().create();

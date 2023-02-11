@@ -1,4 +1,4 @@
-import { ApiSecurity, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiSecurity, ApiTags } from '@nestjs/swagger';
 import { Controller, Post, UseGuards, Request, Get } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { JwtAuthGuard } from './jwt-auth.guard';
@@ -7,7 +7,6 @@ import { LocalAuthGuard } from './local-auth.guard';
 @ApiTags('Authentication')
 @Controller('auth')
 @ApiSecurity('bearer')
-@UseGuards(JwtAuthGuard)
 export class AuthController {
   constructor(private authService: AuthService) {}
 
@@ -19,6 +18,7 @@ export class AuthController {
 
   @Get('/user')
   @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   async getUser(@Request() req): Promise<any> {
     return req.user;
   }

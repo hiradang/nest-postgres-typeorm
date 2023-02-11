@@ -1,3 +1,4 @@
+import { JwtAuthGuard } from './../../auth/jwt-auth.guard';
 import {
   Body,
   Controller,
@@ -5,6 +6,7 @@ import {
   HttpCode,
   Post,
   Query,
+  UseGuards,
   UsePipes,
 } from '@nestjs/common';
 import {
@@ -18,10 +20,12 @@ import { ApiPaginatedResponse } from 'src/common/decorator/api-pagination.repson
 import { CreateQuizDto } from '@/modules/quiz/dto/createQuiz.dto';
 import { QuizService } from '@/modules/quiz/services/quiz.service';
 import { Quiz } from '../entities/quiz.entity';
+import { AdminRoleGuard } from '../../auth/admin-role.guard';
 
 @ApiTags('Quiz')
 @Controller('quiz')
 @ApiBearerAuth()
+@UseGuards(JwtAuthGuard)
 export class QuizController {
   constructor(private quizService: QuizService) {}
 
@@ -52,6 +56,7 @@ export class QuizController {
   @ApiCreatedResponse({ description: 'A quiz has been created!' })
   @HttpCode(200)
   @UsePipes(ValidationPipe)
+  @UseGuards(AdminRoleGuard)
   createQuiz(@Body() quizData: CreateQuizDto) {
     return this.quizService.createQuiz(quizData);
   }
