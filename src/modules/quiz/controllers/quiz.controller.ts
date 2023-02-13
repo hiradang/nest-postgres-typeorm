@@ -20,7 +20,9 @@ import { ApiPaginatedResponse } from 'src/common/decorator/api-pagination.repson
 import { CreateQuizDto } from '@/modules/quiz/dto/createQuiz.dto';
 import { QuizService } from '@/modules/quiz/services/quiz.service';
 import { Quiz } from '../entities/quiz.entity';
-import { AdminRoleGuard } from '../../auth/admin-role.guard';
+import { RolesGuard } from '../../auth/role.guard';
+import { Roles } from '../../auth/roles.decorator';
+import { UserRoles } from '../../user/enums/user.enum';
 
 @ApiTags('Quiz')
 @Controller('quiz')
@@ -56,7 +58,8 @@ export class QuizController {
   @ApiCreatedResponse({ description: 'A quiz has been created!' })
   @HttpCode(200)
   @UsePipes(ValidationPipe)
-  @UseGuards(AdminRoleGuard)
+  @UseGuards(RolesGuard)
+  @Roles(UserRoles.ADMIN, UserRoles.MEMBER)
   createQuiz(@Body() quizData: CreateQuizDto) {
     return this.quizService.createQuiz(quizData);
   }
