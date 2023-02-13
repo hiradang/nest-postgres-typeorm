@@ -13,12 +13,14 @@ import { ConfigModule } from '@nestjs/config';
 import { UserModule } from './modules/user/user.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { ApiTokenCheckMiddleWare } from './common/middleware/api-token-check.middleware';
+import { EventEmitterModule } from '@nestjs/event-emitter';
 
 @Module({
   imports: [
     QuizModule,
     TypeOrmModule.forRootAsync(typeOrmAsyncConfig),
     ConfigModule.forRoot({ isGlobal: true }),
+    EventEmitterModule.forRoot(),
     UserModule,
     AuthModule,
   ],
